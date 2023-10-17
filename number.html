@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>猜數字遊戲</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        #message {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <h1>猜數字遊戲</h1>
+    <p>請猜一個1到100之間的數字:</p>
+    <input type="text" id="guess" />
+    <button onclick="checkGuess()">猜!</button>
+    <p id="message"></p>
+
+    <script>
+        // 生成一個1到100之間的隨機數字
+        const targetNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+
+        function checkGuess() {
+            const guess = parseInt(document.getElementById('guess').value);
+
+            if (isNaN(guess) || guess < 1 || guess > 100) {
+                document.getElementById('message').textContent = '請輸入有效的數字（1到100之間）。';
+                return;
+            }
+
+            attempts++;
+
+            if (guess === targetNumber) {
+                document.getElementById('message').textContent = `恭喜！你猜對了，答案是 ${targetNumber}。你總共猜了 ${attempts} 次。`;
+                document.getElementById('guess').disabled = true;
+            } else if (guess < targetNumber) {
+                document.getElementById('message').textContent = '太小了，再大一點。';
+            } else {
+                document.getElementById('message').textContent = '太大了，再小一點。';
+            }
+        }
+    </script>
+</body>
+</html>
